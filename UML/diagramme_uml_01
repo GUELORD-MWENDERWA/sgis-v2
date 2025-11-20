@@ -1,0 +1,70 @@
+                               +---------------------+
+                               |      SchoolYear      |
+                               +---------------------+
+                               | id                   |
+                               | name                 |
+                               | start_date           |
+                               | end_date             |
+                               +---------------------+
+                                        1
+                                        |
+                                        |
+                                        *
+                               +---------------------+
+                               |      Classroom       |
+                               +---------------------+
+                               | id                   |
+                               | name                 |
+                               | main_teacher (FK User|
+                               +---------------------+
+                                ^                 |
+                                |                 |
+                                |1               |1
+                                |                 |
++----------------+      child   |       teacher   |
+|    Parent      |<-------------+-----------------+
++----------------+               \
+| id             |                \* students
+| user (FK User) |                 \
++----------------+                  v
+                                    +---------------------+
+                                    |       Student        |
+                                    +---------------------+
+                                    | id                   |
+                                    | user (FK User)       |
+                                    | parent (FK User)     |
+                                    | classroom (FK)        |
+                                    +---------------------+
+                                            |
+                                            |1
+                                            |
+                                            v
+                                    +------------------------------+
+                                    |           User               |
+                                    +------------------------------+
+                                    | id                           |
+                                    | username                     |
+                                    | email                        |
+                                    | password                     |
+                                    | role = ADMIN/TEACHER/STUDENT |
+                                    | matricule                    |
+                                    | photo                        |
+                                    +------------------------------+
+
+                           +---------------------------------------------+
+                           |                 Attendance                  |
+                           +---------------------------------------------+
+                           | id                                          |
+                           | user (FK User)                              |
+                           | student (FK Student, null)                  |
+                           | classroom (FK Classroom)                    |
+                           | school_year (FK SchoolYear)                 |
+                           | role                                        |
+                           | action = IN/OUT                             |
+                           | status = PRESENT/LATE/ABSENT/JUSTIFIED      |
+                           | reason                                      |
+                           | date                                        |
+                           | time                                        |
+                           | entry_method = QR/MANUAL                    |
+                           | recorded_by (FK User)                       |
+                           +---------------------------------------------+
