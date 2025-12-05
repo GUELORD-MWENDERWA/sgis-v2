@@ -8,13 +8,14 @@ class SchoolYearSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        Vérifie qu'il n'y a qu'une seule année active.
+        Vérifie qu'il n'y a qu'une seule année scolaire active à la fois.
         """
-        if data.get('is_active'):
+        is_active = data.get('is_active', getattr(self.instance, 'is_active', False))
+        if is_active:
             qs = SchoolYear.objects.filter(is_active=True)
-            # Si update, exclure l'instance existante
+            # Si on update une instance existante, exclure cette instance
             if self.instance:
-                qs = qs.exclude(id=self.instance.id)
+                qs = qs.exclude(pk=self.instance.pk)
             if qs.exists():
                 raise serializers.ValidationError("Il y a déjà une année scolaire active.")
         return data

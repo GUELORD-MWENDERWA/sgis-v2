@@ -3,15 +3,13 @@ from django.dispatch import receiver
 from accounts.models import User
 from .models import QRCode
 
-# -------------------------------------------------------
-#  3) GENERATION / REGENERATION DU QR CODE
-# -------------------------------------------------------
+
+#generation automatique des QR codes pour les nouveaux utilisateurs
 @receiver(post_save, sender=User)
-def auto_create_or_update_qr(sender, instance, created, **kwargs):
+def create_qr_for_new_user(sender, instance, created, **kwargs):
+    """
+    - Crée un QR pour chaque nouvel utilisateur
+    - Ne touche pas aux utilisateurs existants
+    """
     if created:
-        # Nouveau user → créer un QR
         QRCode.objects.create(user=instance)
-    else:
-        # User modifié → QR déjà existant → régénérer
-        if hasattr(instance, "qr_code"):
-            instance.qr_code.save()

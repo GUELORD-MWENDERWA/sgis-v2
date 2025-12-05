@@ -63,8 +63,20 @@ class UserFullSerializer(serializers.ModelSerializer):
 
     def get_teaching_classes(self, obj):
         # Retourne les noms des classes enseignées par cet utilisateur
-        return [c.name for c in getattr(obj, 'classes_teaching', []).all()]
+        classes = getattr(obj, 'classes_teaching', None)
+        if classes is None:
+            return []
+        try:
+            return [c.name for c in classes.all()]
+        except Exception:
+            return []
 
     def get_children_usernames(self, obj):
         # Retourne les usernames des enfants si l'utilisateur est parent
-        return [c.user.username for c in getattr(obj, 'children', []).all()]
+        children = getattr(obj, 'children', None)
+        if children is None:
+            return []
+        try:
+            return [c.user.username for c in children.all()]
+        except Exception:
+            return []

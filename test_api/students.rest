@@ -1,0 +1,64 @@
+### ===========================================
+###   LISTE DES ÉLÈVES
+### ===========================================
+GET http://localhost:8000/api/students/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+
+
+### ===========================================
+###   CRÉER UN ÉLÈVE (ADMIN)
+### ===========================================
+POST http://localhost:8000/api/auth/create/student/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "username": "student01",
+  "password": "student123",
+  "first_name": "Moussa",
+  "last_name": "Sow",
+  "classroom": 1
+}
+
+
+### ===========================================
+###   DÉTAIL D’UN ÉLÈVE
+### ===========================================
+GET http://localhost:8000/api/students/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+
+### ===========================================
+###   MODIFIER UN ÉLÈVE (PUT)
+### ===========================================
+PUT http://localhost:8000/api/students/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+{
+  "first_name": "Ousmane",
+  "last_name": "Ba",
+  "birth_date": "2010-05-12",
+  "gender": "male",
+  "classroom": 3,
+  "parent": 5
+}
+
+
+### ===========================================
+###   MODIFIER PARTIELLEMENT (PATCH)
+### ===========================================
+PATCH http://localhost:8000/api/students/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+{
+  "classroom": 3
+}
+
+
+### ===========================================
+###   SUPPRIMER UN ÉLÈVE
+### ===========================================
+DELETE http://localhost:8000/api/students/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o

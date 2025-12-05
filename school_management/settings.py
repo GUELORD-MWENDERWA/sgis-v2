@@ -47,14 +47,15 @@ INSTALLED_APPS = [
     'schoolyear',                     # gestion des années scolaires
     'classes',                        # classes liées aux années scolaires et enseignants
     'students',                       # élèves liés aux classes et années
-    'qrcodes.apps.QrcodesConfig',                        # gestion des QR codes pour élèves/présence
+    'qrcodes.apps.QrcodesConfig',     # gestion des QR codes pour élèves/présence
     'attendance',                     # gestion de la présence
+    'rfid.apps.RfidConfig',           # gestion des badges RFID
 ]
 
 AUTH_USER_MODEL = "accounts.User"
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
@@ -132,7 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#timezone en france
+TIME_ZONE = 'Africa/Kigali'
 
 USE_I18N = True
 

@@ -1,0 +1,60 @@
+### ===========================================
+###   LISTE DES ANNÉES SCOLAIRES
+### ===========================================
+GET http://localhost:8000/api/schoolyear/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+  
+
+### ===========================================
+###   CRÉER UNE ANNÉE SCOLAIRE (ADMIN)
+### ===========================================
+POST http://localhost:8000/api/schoolyear/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+{
+  "name": "2024-2025",
+  "start_date": "2024-10-01",
+  "end_date": "2025-07-31",
+  "is_active": true
+}
+
+
+### ===========================================
+###   DÉTAIL D'UNE ANNÉE SCOLAIRE
+### ===========================================
+GET http://localhost:8000/api/schoolyear/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+
+### ===========================================
+###   MODIFIER UNE ANNÉE SCOLAIRE (PUT)
+### ===========================================
+PUT http://localhost:8000/api/schoolyear/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+{
+  "name": "2024-2025 (Révisée)",
+  "start_date": "2024-10-01",
+  "end_date": "2025-07-31",
+  "is_active": false
+}
+
+
+### ===========================================
+###   MODIFIER PARTIELLEMENT (PATCH)
+### ===========================================
+PATCH http://localhost:8000/api/schoolyear/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+{
+  "is_active": true
+}
+
+### ===========================================
+###   SUPPRIMER UNE ANNÉE SCOLAIRE
+### ===========================================
+DELETE http://localhost:8000/api/schoolyear/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o

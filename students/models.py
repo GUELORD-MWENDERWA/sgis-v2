@@ -28,5 +28,35 @@ class Student(models.Model):
         limit_choices_to={'role': 'PARENT'}
     )
 
+    # -------------------------------
+    # Meta options
+    # -------------------------------
+    class Meta:
+        unique_together = ('user', 'school_year')  # un élève ne peut pas être inscrit 2 fois la même année
+        ordering = ['school_year', 'classroom__name', 'user__username']
+
+    # -------------------------------
+    # Représentation
+    # -------------------------------
     def __str__(self):
-        return f"{self.user.username} - {self.classroom.name if self.classroom else 'No Class'} ({self.school_year.name})"
+        class_name = self.classroom.name if self.classroom else 'No Class'
+        return f"{self.user.username} - {class_name} ({self.school_year.name})"
+
+    # -------------------------------
+    # Propriétés pratiques
+    # -------------------------------
+    @property
+    def full_name(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+    @property
+    def parent_names(self):
+        return [parent.username for parent in self.parents.all()]
+
+    @property
+    def parent_matricules(self):
+        return [parent.matricule for parent in self.parents.all()]
+
+    @property
+    def classroom_name(self):
+        return self.classroom.name if self.classroom else None

@@ -1,0 +1,50 @@
+### ===========================================
+###   LISTE TOUS LES QRCODES (ADMIN / TEACHER)
+### ===========================================
+GET http://localhost:8000/api/qrcode/qrcodes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+
+### ===========================================
+###   DETAIL D’UN QRCODE
+### ===========================================
+GET http://localhost:8000/api/qrcode/qrcodes/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NjgwOTE5LCJpYXQiOjE3NjQ2NzkxMjAsImp0aSI6IjhlOTMxOGNhOWY2NjQ1MzU4Mzc5NWUxZmEwZmZjODdlIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.DWPWKQSGPXkb5Ye9eBXCGXllJ-Hc5aKe3b8xAtKD7WM
+
+
+### ===========================================
+###   MON QR CODE (UTILISATEUR CONNECTÉ)
+### ===========================================
+GET http://localhost:8000/api/qrcode/my/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NjgwOTE5LCJpYXQiOjE3NjQ2NzkxMjAsImp0aSI6IjhlOTMxOGNhOWY2NjQ1MzU4Mzc5NWUxZmEwZmZjODdlIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.DWPWKQSGPXkb5Ye9eBXCGXllJ-Hc5aKe3b8xAtKD7WM
+
+
+### ===========================================
+###   VALIDER UN QR CODE (SCAN)
+### ===========================================
+POST http://localhost:8000/api/qrcode/validate/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NjgwOTE5LCJpYXQiOjE3NjQ2NzkxMjAsImp0aSI6IjhlOTMxOGNhOWY2NjQ1MzU4Mzc5NWUxZmEwZmZjODdlIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.DWPWKQSGPXkb5Ye9eBXCGXllJ-Hc5aKe3b8xAtKD7WM
+
+{
+  "data": "{\"token\": \"3b18dd75-ed0b-4f30-9db5-8d21ba8c8d7f\"}"
+}
+
+
+### ===========================================
+###   SUPPRIMER UN QR CODE (OPTIONNEL)
+### ===========================================
+DELETE http://localhost:8000/api/qrcode/qrcodes/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NjgwOTE5LCJpYXQiOjE3NjQ2NzkxMjAsImp0aSI6IjhlOTMxOGNhOWY2NjQ1MzU4Mzc5NWUxZmEwZmZjODdlIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.DWPWKQSGPXkb5Ye9eBXCGXllJ-Hc5aKe3b8xAtKD7WM
+
+
+### ===========================================
+###   CREER OU REGEN QR CODE POUR UN USER (ADMIN)
+### ===========================================
+POST http://localhost:8000/api/qrcode/qrcodes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NjgwOTE5LCJpYXQiOjE3NjQ2NzkxMjAsImp0aSI6IjhlOTMxOGNhOWY2NjQ1MzU4Mzc5NWUxZmEwZmZjODdlIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.DWPWKQSGPXkb5Ye9eBXCGXllJ-Hc5aKe3b8xAtKD7WM
+
+{
+  "user": 1
+}

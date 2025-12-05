@@ -25,7 +25,8 @@ urlpatterns = [
     path('api/', include('schoolyear.urls')),
     path('api/', include('classes.urls')),
     path('api/', include('students.urls')),
-    path('api/', include('qrcodes.urls')),
+    path('api/qrcode/', include('qrcodes.urls')),
+    path('api/rfid/', include('rfid.urls')),
     path('api/attendance/', include('attendance.urls')),
 ]
 

@@ -1,0 +1,54 @@
+### ===========================================
+###   LISTE TOUTES LES CLASSES
+### ===========================================
+GET http://localhost:8000/api/classes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+### ===========================================
+###   CREER UNE NOUVELLE CLASSE (ADMIN)
+### ===========================================
+POST http://localhost:8000/api/classes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "name": "6ème A",
+  "level": "6eme",
+  "capacity": 35
+}
+
+
+### ===========================================
+###   DETAILS D’UNE CLASSE
+### ===========================================
+GET http://localhost:8000/api/classes/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+### ===========================================
+###   MODIFIER ENTIEREMENT UNE CLASSE (PUT - ADMIN)
+### ===========================================
+PUT http://localhost:8000/api/classes/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "name": "6ème A - Révisée",
+  "level": "6eme",
+  "capacity": 40
+}
+
+
+### ===========================================
+###   MODIFIER PARTIELLEMENT UNE CLASSE (PATCH - ADMIN)
+### ===========================================
+PATCH http://localhost:8000/api/classes/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "capacity": 45
+}
+
+
+### ===========================================
+###   SUPPRIMER UNE CLASSE (ADMIN)
+### ===========================================
+DELETE http://localhost:8000/api/classes/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ

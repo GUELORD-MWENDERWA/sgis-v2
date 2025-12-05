@@ -1,0 +1,224 @@
+### AUTH - OBtenir token (ex: JWT / ou endpoint auth réel du projet)
+POST http://localhost:8000/api/auth/login/
+Content-Type: application/json
+
+{
+  "username": "Guels",
+  "password": "1"
+}
+
+###
+# Si vous avez un refresh endpoint
+POST http://localhost:8000/api/auth/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ"
+}
+
+###
+# IMPORTANT: Utiliser l'Access token obtenu dans l'en-tête:
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+########################################################################
+# CRUD PRESENCES (Router) -> base: /api/attendance/attendance/
+########################################################################
+
+### LISTE PRESENCES (option: filtres par query params)
+GET http://localhost:8000/api/attendance/attendance/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+### Exemples de filtres :
+GET http://localhost:8000/api/attendance/attendance/?date=2025-01-29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+### 
+GET http://localhost:8000/api/attendance/attendance/?user=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+GET http://localhost:8000/api/attendance/attendance/?student=1&classroom=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+GET http://localhost:8000/api/attendance/attendance/?role=STUDENT
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+### CREER PRESENCE MANUELLE (server-side set date/time/recorded_by)
+POST http://localhost:8000/api/attendance/attendance/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "user": 2,
+  "student": 1,
+  "role": "STUDENT",
+  "action": "IN",        # "IN" ou "OUT"
+  "school_year": 1,
+  "classroom": 3,
+  "reason": "",          # facultatif
+  "note": ""
+}
+
+# Option RFIDs: si vous avez une carte RFID associée, fournissez rfid_uid:
+{
+  "user": 2,
+  "action": "IN",
+  "rfid_uid": "B1B2B3B4B5"
+}
+
+### DETAIL / UPDATE / DELETE
+GET http://localhost:8000/api/attendance/attendance/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+PUT http://localhost:8000/api/attendance/attendance/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "user": 2,
+  "student": 1,
+  "role": "STUDENT",
+  "action": "OUT",
+  "school_year": 1,
+  "classroom": 3,
+  "reason": "",
+  "note": ""
+}
+
+### 
+PATCH http://localhost:8000/api/attendance/attendance/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "note": "Note mise à jour"
+}
+
+DELETE http://localhost:8000/api/attendance/attendance/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+########################################################################
+# SESSIONS (router) -> /api/attendance/session/
+########################################################################
+
+### Liste sessions
+GET http://localhost:8000/api/attendance/session/
+Authorization: Bearer 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+### Créer session (teacher/admin)
+POST http://localhost:8000/api/attendance/session/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "classroom": 3,
+  "school_year": 1,
+  "name": "Cours matin",
+  "date": "2025-12-03",
+  "opened_at": "2025-12-03T08:00:00Z"
+}
+
+### Détail / maj / suppression session
+GET http://localhost:8000/api/attendance/session/1/
+PUT http://localhost:8000/api/attendance/session/1/
+PATCH http://localhost:8000/api/attendance/session/1/
+DELETE http://localhost:8000/api/attendance/session/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+########################################################################
+# SCAN QR CODE -> /api/attendance/scan/
+# Supporte différents formats de payload (data string JSON, token, matricule, user_id)
+########################################################################
+
+### Option A - data encodée (string JSON) - typique du QR décodé côté client
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "data": "{\"token\": \"18dda429-ad6f-44c1-8937-7c0379915f41\"}"
+}
+
+### Option B - token direct
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "token": "18dda429-ad6f-44c1-8937-7c0379915f41"
+}
+
+### Option C - matricule
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "matricule": "STU_2024_001"
+}
+
+### Option D - user id direct (debug utile)
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "user_id": 2
+}
+
+### Option E - RFID UID (ESP32)
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "rfid_uid": "B1B2B3B4B5"
+}
+
+# Réponses attendues:
+# - 201 + {"action":"IN","attendance":{...}}  (premier passage)
+# - 201 + {"action":"OUT","attendance":{...}} (seconde passe)
+# - 200 + {"note": "Présence déjà enregistrée ..."} (si IN & OUT déjà présents)
+# - 400/404 avec message d'erreur clair sinon
+
+########################################################################
+# SCAN RFID -> /api/attendance/rfid/
+########################################################################
+
+POST http://localhost:8000/api/attendance/rfid/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "rfid_uid": "C1C2C3C4C5",
+  "module_token": "c0f81252-c958-48d9-a305-2f21e270d664"
+}
+
+# Réponses:
+# - 201 + {"action":"IN","attendance":{...}} ou {"action":"OUT",...}
+# - 403 si module invalide, 404 si carte inconnue
+
+########################################################################
+# RAPPORTS -> /api/attendance/report/
+########################################################################
+
+# Rapport de classe
+GET http://localhost:8000/api/attendance/report/?classroom=3&start_date=2025-01-01&end_date=2025-01-31
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+# Rapport étudiant
+GET http://localhost:8000/api/attendance/report/?student=5&start_date=2025-01-01&end_date=2025-01-31
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+########################################################################
+# NOTIFICATION PARENTS -> /api/attendance/notify/
+########################################################################
+
+POST http://localhost:8000/api/attendance/notify/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "student_id": 2,
+  "reason": "Absent(e) pour rendez-vous médical"
+}
+

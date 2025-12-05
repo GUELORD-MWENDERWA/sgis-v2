@@ -1,0 +1,83 @@
+###########################################
+#   RFID API — TEST FILE (VSCode REST)    #
+###########################################
+
+@baseUrl = http://127.0.0.1:8000/api/rfid
+@token = c0f81252-c958-48d9-a305-2f21e270d664
+
+####################################################
+# CRÉER / GÉRER CARTES RFID
+####################################################
+
+### 1) Créer une carte (non assignée) — nouveau comportement : user nullable
+POST {{baseUrl}}/cards/create/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "uid": "A1B2C3U4E5",
+  "notes": "Carte bleue n°1"
+}
+
+### 2) Créer une carte et l'assigner immédiatement (via user_id)
+POST {{baseUrl}}/cards/create/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "uid": "B1B2B3B4B5",
+  "notes": "Carte assignée via user_id",
+  "user_id": "7f3f6b0f-868a-4d44-9d41-ca94b6c6124e"
+}
+
+### 3) Créer une carte et l'assigner à l'utilisateur authentifié
+POST {{baseUrl}}/cards/create/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "uid": "C1C2C3C4C5",
+  "notes": "Carte assignée au user connecté",
+  "assign_to_request_user": "true"
+}
+
+### 4) Lister les cartes non assignées
+GET {{baseUrl}}/cards/available/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+### 5) Assigner une carte existante à un utilisateur (séparé)
+POST {{baseUrl}}/cards/assign/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "card_id": 2,
+  "user_id": "38891b15-0697-4b5b-a932-96719f9db2fa"
+}
+
+### 6) Exemple: désassigner une carte (non-implémenté par défaut) — utiliser admin si besoin
+
+####################################################
+# MODULES RFID (ESP32) - création / listing / check
+####################################################
+
+### 7) Créer un module RFID
+POST {{baseUrl}}/modules/create/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+{
+  "name": "RFID Gate A",
+  "location": "Entrée principale",
+  "notes": "Module ESP32"
+}
+
+### 8) Lister tous les modules RFID
+GET {{baseUrl}}/modules/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY1MDI0NTg2LCJpYXQiOjE3NjQ5MzgxODYsImp0aSI6ImM0ODExNzZmYTU0NzQwZGFhZGRhMmE4OWVhMzM2Nzg4IiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.M58IJxTO4HhXRj9-EZYKznz2vtooiv7cEhB__WR9xJk
+
+### 9) Vérifier un module (handshake depuis ESP32)
+POST {{baseUrl}}/modules/check/
+Content-Type: application/json
+
+{
+  "token": "c0f81252-c958-48d9-a305-2f21e270d664"
+}
+
+####################################################
+####################################################

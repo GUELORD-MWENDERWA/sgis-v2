@@ -1,4 +1,5 @@
 import os
+import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.utils.timezone import now
@@ -33,6 +34,10 @@ class User(AbstractUser):
         null=True,
         default="users/photos/default.jpg"
     )
+
+    # Identifiant unique
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
 
     # Champ matricule (sera généré plus tard)
     matricule = models.CharField(max_length=20, unique=True, blank=True, null=True)

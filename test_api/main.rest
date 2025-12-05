@@ -1,0 +1,159 @@
+##############################################
+#               AUTHENTIFICATION
+##############################################
+
+### LOGIN — obtenir access + refresh
+POST http://localhost:8000/api/auth/login/
+Content-Type: application/json
+
+{
+  "username": "Guels",
+  "password": "1"
+}
+
+### REFRESH TOKEN
+POST http://localhost:8000/api/auth/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2NDQ4NzI0NiwiaWF0IjoxNzYzODgyNDQ2LCJqdGkiOiJiMDE2NTYxODA1NmU0ODkwOGY2Mjk3OWU0M2NiOWZjMyIsInVzZXJfaWQiOiIzODg5MWIxNS0wNjk3LTRiNWItYTkzMi05NjcxOWY5ZGIyZmEifQ._ERg-jyvnyB8ELKiyCaCW_E8BdDWjZfRSseF7bVcpDI"
+}
+
+
+
+##############################################
+#                 MON COMPTE
+##############################################
+
+### Infos basiques
+GET http://localhost:8000/api/auth/me/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+### Infos complètes
+GET http://localhost:8000/api/auth/me/full/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+
+##############################################
+#            CRÉATION DES UTILISATEURS
+##############################################
+
+### Créer un élève
+POST http://localhost:8000/api/auth/create/student/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "username": "student01",
+  "password": "student123",
+  "first_name": "Moussa",
+  "last_name": "Sow",
+  "classroom": 1
+}
+
+### Créer un parent
+POST http://localhost:8000/api/auth/create/parent/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+
+{
+  "username": "parent01",
+  "password": "parent123",
+  "first_name": "Fatou",
+  "last_name": "Ndoye"
+}
+
+### Créer un enseignant
+POST http://localhost:8000/api/auth/create/teacher/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0ODY3MTM0LCJpYXQiOjE3NjQ3ODA3MzQsImp0aSI6IjQ2ODE4OWJlODE1MDRhYzNhZDkxMWMwNDVkNTdjOGMwIiwidXNlcl9pZCI6ImZkOTlhOGYwLWY4MjMtNGNlYS1hMzZjLTE1OGIzOWQ1MTVkYiJ9.C4BvPusNRcI13jRz_vOEp0Cf9PFdRMZG2BdwhG6C0TQ
+{
+  "username": "teacher0a1",
+  "password": "teacher123",
+  "first_name": "Awa",
+  "last_name": "Sarr"
+}
+
+
+
+##############################################
+#                  CLASSES
+##############################################
+
+### Liste des classes
+GET http://localhost:8000/api/classes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+### Créer une classe
+POST http://localhost:8000/api/classes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+  {
+    "name": "3HT-ELECTRONIQUE",
+    "year": 1,
+    "year_name": "2025-2026",
+    "main_teacher": "fde703e4-e2d5-4674-818d-1506811822c6",
+    "teachers": [],
+    "students": []
+  }
+
+
+
+##############################################
+#                  STUDENTS
+##############################################
+
+### Liste des élèves
+GET http://localhost:8000/api/students/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+### Détail d’un élève
+GET http://localhost:8000/api/students/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+
+
+##############################################
+#                  QR CODES
+##############################################
+
+### Mon QR Code
+GET http://localhost:8000/api/qrcode/my/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzODk2MDAwLCJpYXQiOjE3NjM4OTQyMDAsImp0aSI6ImNkYmZhOTFiYTAyMjRmODNiZDNkOWRiM2Q3OTI4OTk1IiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.m2zp_4htxvrst-vE0gayNU6H6rjJAQWCB0wRgGodM_o
+
+### Valider un QR Code (scan)
+POST http://localhost:8000/api/qrcode/validate/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDM3NjYyLCJpYXQiOjE3NjQ0MzU4NjIsImp0aSI6ImZhNmZkYThjODVmZTRkMTM4YjFjY2IyOTVmN2ViZWJkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.dUw6Mdr3hteSesOP7BUVzZuy79LBrUSyYNDp1gTJUQE{
+  "data": "{\"matricule\": \"STU-IRP6CZ\"}"
+}
+
+
+
+
+##############################################
+#                 ATTENDANCE
+##############################################
+
+### Scanner un QR Code (IN/OUT)
+POST http://localhost:8000/api/attendance/scan/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDM3NjYyLCJpYXQiOjE3NjQ0MzU4NjIsImp0aSI6ImZhNmZkYThjODVmZTRkMTM4YjFjY2IyOTVmN2ViZWJkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.dUw6Mdr3hteSesOP7BUVzZuy79LBrUSyYNDp1gTJUQE{
+  "matricule": "STU-IRP6CZ"
+}
+
+### Voir toutes les présences
+GET http://localhost:8000/api/attendance/crud/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDM3NjYyLCJpYXQiOjE3NjQ0MzU4NjIsImp0aSI6ImZhNmZkYThjODVmZTRkMTM4YjFjY2IyOTVmN2ViZWJkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.dUw6Mdr3hteSesOP7BUVzZuy79LBrUSyYNDp1gTJUQE### Générer un rapport de présence par classe et période
+GET http://localhost:8000/api/attendance/report/?classroom=1&start_date=2025-01-01&end_date=2025-01-31
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDg3NzA1LCJpYXQiOjE3NjQ0ODU5MDUsImp0aSI6IjI4ODk0NTA3NjI0MTQ3N2E4MDUwOTg5MmEwYzRjZDVkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.U2flbkS4CedPugqy656ldz08A1qpI13Lfrh0KoLtDGU##############################################
+#               SCHOOL YEARS
+##############################################
+
+### Liste des années scolaires
+GET http://localhost:8000/api/schoolyear/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDM3NjYyLCJpYXQiOjE3NjQ0MzU4NjIsImp0aSI6ImZhNmZkYThjODVmZTRkMTM4YjFjY2IyOTVmN2ViZWJkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.dUw6Mdr3hteSesOP7BUVzZuy79LBrUSyYNDp1gTJUQE### Activer une année scolaire
+PATCH http://localhost:8000/api/schoolyear/schoolyears/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0NDM3NjYyLCJpYXQiOjE3NjQ0MzU4NjIsImp0aSI6ImZhNmZkYThjODVmZTRkMTM4YjFjY2IyOTVmN2ViZWJkIiwidXNlcl9pZCI6IjM4ODkxYjE1LTA2OTctNGI1Yi1hOTMyLTk2NzE5ZjlkYjJmYSJ9.dUw6Mdr3hteSesOP7BUVzZuy79LBrUSyYNDp1gTJUQE{
+  "is_active": true
+}

@@ -1,0 +1,168 @@
+#%RAML 1.0
+title: Accounts API
+version: v1
+baseUri: http://localhost:8000/api/{version}
+mediaType: application/json
+
+types:
+  RoleType:
+    type: string
+    enum: [STUDENT, TEACHER, PARENT, ADMIN]
+    description: "Rôle de l'utilisateur"
+
+  User:
+    type: object
+    properties:
+      id: integer
+      username: string
+      first_name: string
+      last_name: string
+      email: string
+      role: RoleType
+      matricule: string
+      photo?: string
+    required: [username, first_name, last_name, email, role]
+
+  UserCreate:
+    type: object
+    properties:
+      username: string
+      first_name: string
+      last_name: string
+      email: string
+      role: RoleType
+      password: string
+      photo?: string
+    required: [username, first_name, last_name, email, role, password]
+
+  UserUpdate:
+    type: object
+    properties:
+      username?: string
+      first_name?: string
+      last_name?: string
+      email?: string
+      role?: RoleType
+      password?: string
+      photo?: string
+
+/users:
+  get:
+    description: "Liste tous les utilisateurs. Filtrable par rôle."
+    queryParameters:
+      role:
+        type: RoleType
+        required: false
+        description: "Filtrer par rôle (STUDENT, TEACHER, PARENT, ADMIN)"
+    responses:
+      200:
+        body:
+          application/json:
+            type: User[]
+            example:
+              - id: 1
+                username: jdoe
+                first_name: John
+                last_name: Doe
+                email: jdoe@example.com
+                role: STUDENT
+                matricule: STU-ABC123
+                photo: "/media/users/photos/jdoe.jpg"
+              - id: 2
+                username: tsmith
+                first_name: Tom
+                last_name: Smith
+                email: tsmith@example.com
+                role: TEACHER
+                matricule: TEA-XYZ456
+                photo: null
+
+  post:
+    description: "Créer un nouvel utilisateur (Admin seulement)"
+    body:
+      application/json:
+        type: UserCreate
+        example:
+          username: jdoe
+          first_name: John
+          last_name: Doe
+          email: jdoe@example.com
+          role: STUDENT
+          password: secret123
+          photo: "/media/users/photos/default.jpg"
+    responses:
+      201:
+        body:
+          application/json:
+            type: User
+            example:
+              id: 1
+              username: jdoe
+              first_name: John
+              last_name: Doe
+              email: jdoe@example.com
+              role: STUDENT
+              matricule: STU-ABC123
+              photo: "/media/users/photos/jdoe.jpg"
+
+/users/{id}:
+  uriParameters:
+    id:
+      type: integer
+      description: "Identifiant unique de l'utilisateur"
+
+  get:
+    description: "Détail d'un utilisateur"
+    responses:
+      200:
+        body:
+          application/json:
+            type: User
+            example:
+              id: 1
+              username: jdoe
+              first_name: John
+              last_name: Doe
+              email: jdoe@example.com
+              role: STUDENT
+              matricule: STU-ABC123
+              photo: "/media/users/photos/jdoe.jpg"
+
+  put:
+    description: "Remplace entièrement un utilisateur (Admin seulement)"
+    body:
+      application/json:
+        type: UserCreate
+        example:
+          username: jdoe
+          first_name: John
+          last_name: Doe
+          email: jdoe@example.com
+          role: STUDENT
+          password: newpassword123
+          photo: "/media/users/photos/jdoe_new.jpg"
+    responses:
+      200:
+        body:
+          application/json:
+            type: User
+
+  patch:
+    description: "Mettre à jour partiellement un utilisateur (Admin seulement)"
+    body:
+      application/json:
+        type: UserUpdate
+        example:
+          first_name: Jonathan
+          photo: "/media/users/photos/jdoe_updated.jpg"
+    responses:
+      200:
+        body:
+          application/json:
+            type: User
+
+  delete:
+    description: "Supprimer un utilisateur (Admin seulement)"
+    responses:
+      204:
+        description: "Utilisateur supprimé avec succès"

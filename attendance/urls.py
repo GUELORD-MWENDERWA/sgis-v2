@@ -1,33 +1,75 @@
-from django.urls import path, include  # include importé correctement
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
 from .views import (
     AttendanceViewSet,
-    ScanAttendanceAPIView,   # anciennement ScanQRCodeView
-    # Si tu as d'autres vues spécifiques comme MyAttendanceView, AttendanceListView, ValidateAttendanceView
-    # elles doivent être importées ici
+    AttendanceSessionViewSet,
+    ScanAttendanceAPIView,
+    RFIDAttendanceAPIView,
+    AttendanceReportAPIView,
+    NotifyAbsencesAPIView
 )
-
-from rest_framework.routers import DefaultRouter
 
 app_name = "attendance"
 
-# Router pour CRUD complet (Admin/Teacher/Owner)
+# -------------------------------------------
+# ROUTER : CRUD PRESENCE + CRUD SESSION
+# -------------------------------------------
 router = DefaultRouter()
-router.register(r'crud', AttendanceViewSet, basename='attendance_crud')
+router.register(r'attendance', AttendanceViewSet, basename='attendance')
+router.register(r'session', AttendanceSessionViewSet, basename='attendance_session')
 
+# -------------------------------------------
+# URLS COMPLETS
+# -------------------------------------------
 urlpatterns = [
-    # Scanner un QR code pour enregistrer présence
-    path('scan/', ScanAttendanceAPIView.as_view(), name='scan_attendance'),
 
-    # CRUD complet via router
+    # ---- Enregistrement via scan QR ----
+    path('scan/', ScanAttendanceAPIView.as_view(), name='scan'),
+
+    # ---- Enregistrement via RFID ----
+    path('rfid/', RFIDAttendanceAPIView.as_view(), name='rfid'),
+
+    # ---- Rapport de présence ----
+    path('report/', AttendanceReportAPIView.as_view(), name='report'),
+
+    # ---- Notifications parents ----
+    path('notify/', NotifyAbsencesAPIView.as_view(), name='notify'),
+
+    # ---- CRUD Attendance + Sessions ----
     path('', include(router.urls)),
-
 ]
 
-# ✅ Endpoints disponibles :
-# POST /api/attendance/scan/           -> Scanner QR code
-# GET  /api/attendance/crud/           -> Liste toutes les présences
-# POST /api/attendance/crud/           -> Créer une présence manuellement
-# GET  /api/attendance/crud/{id}/      -> Détails d'une présence
-# PUT  /api/attendance/crud/{id}/      -> Modifier entièrement une présence
-# PATCH /api/attendance/crud/{id}/    -> Modifier partiellement une présence
-# DELETE /api/attendance/crud/{id}/   -> Supprimer une présence
+
+"""
+ENDPOINTS DISPONIBLES :
+
+--- QR CODE ---
+POST   /api/attendance/scan/  
+
+--- RFID MODULE ---
+POST   /api/attendance/rfid/  
+
+--- CRUD SINGLE PRESENCE ---
+GET    /api/attendance/attendance/
+POST   /api/attendance/attendance/
+GET    /api/attendance/attendance/{id}/
+PUT    /api/attendance/attendance/{id}/
+PATCH  /api/attendance/attendance/{id}/
+DELETE /api/attendance/attendance/{id}/
+
+--- CRUD ATTENDANCE SESSION ---
+GET    /api/attendance/session/
+POST   /api/attendance/session/
+GET    /api/attendance/session/{id}/
+PUT    /api/attendance/session/{id}/
+PATCH  /api/attendance/session/{id}/
+DELETE /api/attendance/session/{id}/
+
+--- REPORT ---
+GET    /api/attendance/report/?classroom=1&start_date=2025-01-01&end_date=2025-01-31
+GET    /api/attendance/report/?student=3&start_date=2025-01-01&end_date=2025-01-31
+
+--- NOTIFY PARENTS ---
+POST   /api/attendance/notify/
+"""
