@@ -69,7 +69,7 @@ cd sgis-v2
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-# create a .env file with the variables listed below
+cp .env.example .env               # then fill in SECRET_KEY
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
@@ -101,4 +101,4 @@ Python, Django 5.2, Django REST Framework, Simple JWT, django-cors-headers, qrco
 
 ## License
 
-No license has been specified yet. Contact the author before reusing this code.
+MIT. See [LICENSE](LICENSE).

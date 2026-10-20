@@ -1,0 +1,23 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Django
+*.log
+db.sqlite3
+staticfiles/
+# Uploaded and generated files (media/users/photos/default.jpg stays tracked)
+media/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
